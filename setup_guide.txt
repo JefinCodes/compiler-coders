@@ -15,8 +15,7 @@ Instructions to setup stage 1 compiler in a Debian machine
 5) Command to run stage 1 compiler(lexer + parser)
    ./bcs24 <relative_path_to_input_file>
    
-6) Test with valid sample program
-   ./bcs24 valid.bcs
+6) Test with sample program
+   ./bcs24 sample.bcs
    
-7) Test with invalid sample program
-   ./bcs24 invalid.bcs
+7) View sample program output at tac.txt

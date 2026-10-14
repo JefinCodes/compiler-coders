@@ -1,5 +1,19 @@
 %{
 #include "bcs24.tab.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+static char *copy_lexeme(const char *text)
+{
+    size_t size = strlen(text) + 1;
+    char *copy = malloc(size);
+
+    if (copy != NULL)
+        memcpy(copy, text, size);
+
+    return copy;
+}
 %}
 
 %option noyywrap
@@ -18,8 +32,15 @@ digit  [0-9]
 "int"             return INT;
 "bool"            return BOOL;
 
-{letter}({letter}|{digit})*    return ID;
-{digit}+                       return NUM;
+{letter}({letter}|{digit})* {
+    yylval.text = copy_lexeme(yytext);
+    return ID;
+}
+
+{digit}+ {
+    yylval.text = copy_lexeme(yytext);
+    return NUM;
+}
 
 "<="              return LE;
 ">="              return GE;
